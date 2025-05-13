@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 
@@ -19,16 +19,16 @@ const ListFilm = () => {
         setValue(e.target.value)
     }
 
-   const setSearch = () => {
-    if (value === "") {
-        setFilm(FilmList);
-    } else {
-        const filteredFilm = FilmList.filter((film) =>
-            film.genre.toLowerCase().includes(value.toLowerCase())
-        );
-        setFilm(filteredFilm);
-    }
-};
+   useEffect(() => {
+        if (value === "") {
+            setFilm(FilmList);
+        } else {
+            const filteredFilm = FilmList.filter((film) =>
+                film.genre.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilm(filteredFilm);
+        }
+    }, [value]);;
 
     return (
         <>
@@ -40,7 +40,7 @@ const ListFilm = () => {
                     <option value="romantico">Romantico</option>
                     <option value="azione">Azione</option>
                 </select>
-                <button className='search' onClick={ setSearch}> cerca</button>
+                {/* <button className='search' onClick={ setSearch}> cerca</button> */}
             </div>
 
             {
